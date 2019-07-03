@@ -1,31 +1,33 @@
 const net = require('net');
+const {IP, PORT} = require('./constants') 
+
+const { singleMove } = require('./movement');
+
 const connect = function() {
-    const conn = net.createConnection({ 
-      host: '172.46.2.196',
-      port: 50541
-    });
-    // interpret incoming data as text
+
+  const conn = net.createConnection({ 
+    host: IP,
+    port: PORT
+  });
+
     conn.setEncoding('utf8'); 
   
-  //   conn.on('connect', () => {
-  //       console.log('hey');
-  //       conn.write('I am here');
-  //   })
-  
-  //   conn.on('close', () => {
-  //       console.log('awfasfdas')
-  //   })
   
     conn.on('data', (data) => {
         console.log(`Server says ${data}`)
     })
   
     conn.on('connect', () => {
-      conn.write('Name: ___');
+      conn.write('Name: ABC');
+
+      //conn.write('Say: I AM YO MAN')
+
     })
 
+
     return conn;
-  }
+  };
 
 
-  module.exports = {connect};
+
+module.exports = {connect, singleMove};
